@@ -10,8 +10,9 @@ import UIKit
 class HomeRouter: BaseRouter {
     func createSceneViewController() -> UIViewController {
         let repository = HomeRepository()
+        let useCase = SymbolUseCase(repository: repository)
         let router = HomeRouter()
-        let homeViewModel = HomeViewModel(repository: repository)
+        let homeViewModel = HomeViewModel(useCase: useCase)
         let HomeViewController = HomeViewController(viewModel: homeViewModel, router: router)
         
         return HomeViewController

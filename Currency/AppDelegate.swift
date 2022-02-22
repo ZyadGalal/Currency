@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let homeController = HomeRouter.createHomeViewController()
+        let homeController = HomeRouter().createSceneViewController()
         let navigationController = UINavigationController(rootViewController: homeController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

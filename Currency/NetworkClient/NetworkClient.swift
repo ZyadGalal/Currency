@@ -5,15 +5,22 @@
 //  Created by Zyad Galal on 22/02/2022.
 //
 
-import Foundation
+import UIKit
 
 
 class NetworkClient {
     func performRequest<T: Decodable>(_ object: T.Type, router: APIRouter, completion: @escaping ((Result<T, Error>) -> Void)) {
         
-        var request = URLRequest(url: URL(string: NetworkConstants.baseUrl + router.path)!)
+        let queryItems = router.queryParameters.map{
+            return URLQueryItem(name: "\($0)", value: "\($1)")
+        }
+        guard var urlComponents = URLComponents(string: NetworkConstants.baseUrl + router.path) else {return}
+        urlComponents.queryItems = queryItems
+        
+        var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = router.method.rawValue
-        DispatchQueue.main.async {
+        
+        DispatchQueue.global().async {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
@@ -32,7 +39,8 @@ class NetworkClient {
                         completion(.failure(error))
                     }
                 }
-            }
+            }.resume()
         }
     }
 }
+

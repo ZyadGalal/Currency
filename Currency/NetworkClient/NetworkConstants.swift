@@ -8,5 +8,5 @@
 import Foundation
 
 class NetworkConstants {
-    static let baseUrl = "http://i0sa.com/pizza/"
+    static let baseUrl = "http://data.fixer.io/api/"
 }
