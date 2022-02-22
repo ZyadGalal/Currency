@@ -9,8 +9,9 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class BaseWireframe<T: BaseViewModel>: UIViewController {
+class BaseWireframe<T: BaseViewModel, R:BaseRouter>: UIViewController {
     var viewModel: T!
+    var router: R!
     let progressIndicator = ProgressIndicator()
     lazy var disposeBag: DisposeBag = {
         return DisposeBag()
@@ -22,8 +23,9 @@ class BaseWireframe<T: BaseViewModel>: UIViewController {
         bindStates()
     }
     
-    init(viewModel: T) {
+    init(viewModel: T, router: R) {
         self.viewModel = viewModel
+        self.router = router
         super.init(nibName: String(describing: type(of: self)), bundle: nil)
     }
     
@@ -31,7 +33,6 @@ class BaseWireframe<T: BaseViewModel>: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.addSubview(progressIndicator)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

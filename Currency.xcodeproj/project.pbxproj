@@ -24,6 +24,12 @@
 		3200879027C45107008526C1 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200878F27C45107008526C1 /* NetworkConstants.swift */; };
 		3200879227C45122008526C1 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200879127C45122008526C1 /* NetworkClient.swift */; };
 		3234E13F27C4B62D000508D2 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E13E27C4B62D000508D2 /* ProgressIndicator.swift */; };
+		3234E14627C4C375000508D2 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14527C4C375000508D2 /* DetailsViewModel.swift */; };
+		3234E14927C4C437000508D2 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14727C4C437000508D2 /* DetailsViewController.swift */; };
+		3234E14A27C4C437000508D2 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3234E14827C4C437000508D2 /* DetailsViewController.xib */; };
+		3234E14C27C4C459000508D2 /* DetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14B27C4C459000508D2 /* DetailsRepository.swift */; };
+		3234E14E27C4C4E6000508D2 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14D27C4C4E6000508D2 /* DetailsRouter.swift */; };
+		3234E15027C4C6DD000508D2 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14F27C4C6DD000508D2 /* BaseRouter.swift */; };
 		36F696F72B36E5F7789D576A /* Pods_Currency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E553E6100BCBEDDE7E04973 /* Pods_Currency.framework */; };
 		45B44495E45F0EEAB3005825 /* Pods_CurrencyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E2CE85EE383E5FABBEB2B8 /* Pods_CurrencyTests.framework */; };
 		7EA7698BC7E03023EF20409C /* Pods_Currency_CurrencyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FC74A42333D7202B603901 /* Pods_Currency_CurrencyUITests.framework */; };
@@ -73,6 +79,12 @@
 		3200878F27C45107008526C1 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		3200879127C45122008526C1 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		3234E13E27C4B62D000508D2 /* ProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
+		3234E14527C4C375000508D2 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		3234E14727C4C437000508D2 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		3234E14827C4C437000508D2 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
+		3234E14B27C4C459000508D2 /* DetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRepository.swift; sourceTree = "<group>"; };
+		3234E14D27C4C4E6000508D2 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
+		3234E14F27C4C6DD000508D2 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		4F2D4DC4FCADC25ED566FFB2 /* Pods-Currency-CurrencyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currency-CurrencyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Currency-CurrencyUITests/Pods-Currency-CurrencyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F15BE3140F448BCEDD4AF41 /* Pods-Currency.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currency.release.xcconfig"; path = "Target Support Files/Pods-Currency/Pods-Currency.release.xcconfig"; sourceTree = "<group>"; };
 		B0FC74A42333D7202B603901 /* Pods_Currency_CurrencyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currency_CurrencyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +189,7 @@
 		3200877527C41330008526C1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				3234E14027C4C346000508D2 /* DetailsScene */,
 				3200877627C41339008526C1 /* HomeScene */,
 			);
 			path = Scene;
@@ -231,6 +244,7 @@
 			children = (
 				3200878827C41ACC008526C1 /* BaseWireframe.swift */,
 				3200878A27C41AFE008526C1 /* BaseViewModel.swift */,
+				3234E14F27C4C6DD000508D2 /* BaseRouter.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -251,6 +265,50 @@
 				3234E13E27C4B62D000508D2 /* ProgressIndicator.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3234E14027C4C346000508D2 /* DetailsScene */ = {
+			isa = PBXGroup;
+			children = (
+				3234E14427C4C366000508D2 /* Router */,
+				3234E14327C4C35D000508D2 /* ViewModel */,
+				3234E14227C4C358000508D2 /* View */,
+				3234E14127C4C351000508D2 /* Repository */,
+			);
+			path = DetailsScene;
+			sourceTree = "<group>";
+		};
+		3234E14127C4C351000508D2 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				3234E14B27C4C459000508D2 /* DetailsRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		3234E14227C4C358000508D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3234E14727C4C437000508D2 /* DetailsViewController.swift */,
+				3234E14827C4C437000508D2 /* DetailsViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3234E14327C4C35D000508D2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3234E14527C4C375000508D2 /* DetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3234E14427C4C366000508D2 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				3234E14D27C4C4E6000508D2 /* DetailsRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		F0D179AC2CC9D4C304662A45 /* Frameworks */ = {
@@ -375,6 +433,7 @@
 				3200874927C4095C008526C1 /* LaunchScreen.storyboard in Resources */,
 				3200874627C4095C008526C1 /* Assets.xcassets in Resources */,
 				3200877F27C41696008526C1 /* HomeViewController.xib in Resources */,
+				3234E14A27C4C437000508D2 /* DetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +563,7 @@
 			files = (
 				3200879027C45107008526C1 /* NetworkConstants.swift in Sources */,
 				3200879227C45122008526C1 /* NetworkClient.swift in Sources */,
+				3234E14C27C4C459000508D2 /* DetailsRepository.swift in Sources */,
 				3200873D27C4095A008526C1 /* AppDelegate.swift in Sources */,
 				3200878527C41800008526C1 /* HomeRepository.swift in Sources */,
 				3200877E27C41696008526C1 /* HomeViewController.swift in Sources */,
@@ -511,8 +571,12 @@
 				3200878927C41ACC008526C1 /* BaseWireframe.swift in Sources */,
 				3200878B27C41AFF008526C1 /* BaseViewModel.swift in Sources */,
 				3200878E27C45027008526C1 /* APIRouter.swift in Sources */,
+				3234E15027C4C6DD000508D2 /* BaseRouter.swift in Sources */,
 				3200878127C417ED008526C1 /* HomeViewModel.swift in Sources */,
 				3200878327C417F4008526C1 /* HomeRouter.swift in Sources */,
+				3234E14927C4C437000508D2 /* DetailsViewController.swift in Sources */,
+				3234E14E27C4C4E6000508D2 /* DetailsRouter.swift in Sources */,
+				3234E14627C4C375000508D2 /* DetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

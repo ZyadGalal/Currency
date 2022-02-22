@@ -9,12 +9,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class HomeViewController: BaseWireframe<HomeViewModel> {
+class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
 
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var fromCurrency: UITextField!
     @IBOutlet weak var toCurrency: UITextField!
+    @IBOutlet weak var detailsButton: UIButton!
     
     lazy var fromPickerView: UIPickerView = {
         return UIPickerView()
@@ -61,7 +62,12 @@ class HomeViewController: BaseWireframe<HomeViewModel> {
                 self.viewModel.toTextFieldDataChanged(with: self.toTextField.text!)
 
             }).disposed(by: disposeBag)
-        
+        detailsButton.rx.tap.subscribe{ [weak self] event in
+            guard let self = self else {return}
+            let detailsViewController = self.router.createDetailsController()
+            self.navigationController?.pushViewController(detailsViewController, animated: true)
+            
+        }.disposed(by: disposeBag)
         viewModel.price.bind(to: fromCurrency.rx.text).disposed(by: disposeBag)
         
         viewModel.pickerItems.bind(to: fromPickerView.rx.itemTitles){_, item in

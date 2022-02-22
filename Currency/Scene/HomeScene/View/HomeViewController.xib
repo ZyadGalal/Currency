@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Currency" customModuleProvider="target">
             <connections>
+                <outlet property="detailsButton" destination="YKq-ld-TLo" id="dae-oc-1OP"/>
                 <outlet property="fromCurrency" destination="aiM-Xx-9JT" id="8QK-zL-cOF"/>
                 <outlet property="fromTextField" destination="f9H-Wz-StT" id="BKe-GZ-GHP"/>
                 <outlet property="toCurrency" destination="Vj2-fW-c2W" id="lLv-4q-gbf"/>
@@ -79,14 +80,25 @@
                         <constraint firstItem="gDX-ez-aBt" firstAttribute="width" secondItem="hfz-Fz-f3y" secondAttribute="width" id="JDi-eU-Lky"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKq-ld-TLo">
+                    <rect key="frame" x="32" y="527.5" width="350" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="sv9-yu-Wpd"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Details"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="707-G6-EY2" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="0Qx-J8-gQd"/>
+                <constraint firstItem="YKq-ld-TLo" firstAttribute="top" secondItem="707-G6-EY2" secondAttribute="bottom" constant="32" id="2m7-Xs-VsC"/>
+                <constraint firstItem="YKq-ld-TLo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="2wq-od-axj"/>
                 <constraint firstItem="707-G6-EY2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="67T-US-h8e"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="707-G6-EY2" secondAttribute="trailing" constant="16" id="qeE-eM-IKr"/>
                 <constraint firstItem="707-G6-EY2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="tId-jS-90g"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YKq-ld-TLo" secondAttribute="trailing" constant="32" id="xij-Fa-t4G"/>
             </constraints>
             <point key="canvasLocation" x="139" y="122"/>
         </view>

@@ -7,14 +7,17 @@
 
 import UIKit
 
-class HomeRouter {
-    class func createHomeViewController() -> UIViewController{
+class HomeRouter: BaseRouter {
+    func createSceneViewController() -> UIViewController {
         let repository = HomeRepository()
+        let router = HomeRouter()
         let homeViewModel = HomeViewModel(repository: repository)
-        let HomeViewController = HomeViewController(viewModel: homeViewModel)
-        
+        let HomeViewController = HomeViewController(viewModel: homeViewModel, router: router)
         
         return HomeViewController
     }
-    
+
+    func createDetailsController() -> UIViewController{
+        return DetailsRouter().createSceneViewController()
+    }
 }
