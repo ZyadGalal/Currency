@@ -13,18 +13,25 @@ class NetworkClient {
         
         var request = URLRequest(url: URL(string: NetworkConstants.baseUrl + router.path)!)
         request.httpMethod = router.method.rawValue
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            }
-            do {
-                guard let data = data else {return}
-                let result = try JSONDecoder().decode(T.self, from: data)
-                completion(.success(result))
-            }
-            catch {
-                completion(.failure(error))
+        DispatchQueue.main.async {
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+                do {
+                    guard let data = data else {return}
+                    let result = try JSONDecoder().decode(T.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(result))
+                    }
+                }
+                catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
             }
         }
     }
