@@ -18,6 +18,7 @@ class HomeViewModel: BaseViewModel, output {
     var price: Observable<String>
     var pickerItems: Observable<[String]>
     
+    var loading: Bool = false
     private var prices: BehaviorRelay<String> = .init(value: "zyad")
     private let items: Observable<[String]> = Observable.of(["Row1", "Row2", "Row3"])
     init(repository: HomeRepository) {
@@ -27,13 +28,15 @@ class HomeViewModel: BaseViewModel, output {
     }
     
     func viewDidLoad() {
-        _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setPrice), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(setPrice), userInfo: nil, repeats: true)
     }
     
     @objc func setPrice() {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
           
         prices.accept(String((0..<4).map{ _ in letters.randomElement()! }))
+        loading = loading ? false : true
+        isLoading.onNext(loading)
     }
     func fromTextFieldDataChanged(with string: String) {
         print(string)

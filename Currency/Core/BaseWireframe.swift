@@ -11,7 +11,7 @@ import RxSwift
 
 class BaseWireframe<T: BaseViewModel>: UIViewController {
     var viewModel: T!
-
+    let progressIndicator = ProgressIndicator()
     lazy var disposeBag: DisposeBag = {
         return DisposeBag()
     }()
@@ -30,9 +30,13 @@ class BaseWireframe<T: BaseViewModel>: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.addSubview(progressIndicator)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        progressIndicator.removeFromSuperview()
+    }
     func bind(viewModel: T){
         fatalError("Please override bind function")
     }
@@ -47,15 +51,18 @@ class BaseWireframe<T: BaseViewModel>: UIViewController {
         }.disposed(by: disposeBag)
         
         viewModel.isLoading.subscribe { [weak self] (isLoading) in
+            guard let self = self else {return}
             guard let isLoading = isLoading.element else { return }
             if(isLoading){
-                //self?.view.makeToastActivity(.center)
+                self.progressIndicator.show(with: "Loading")
             } else {
-                //self?.view.hideToastActivity()
+                self.progressIndicator.hide()
             }
         }.disposed(by: disposeBag)
 
     }
+    
+    
 }
 
 extension BaseWireframe {
