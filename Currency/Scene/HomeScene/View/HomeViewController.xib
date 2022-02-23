@@ -29,7 +29,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="gDX-ez-aBt">
                             <rect key="frame" x="0.0" y="0.0" width="161" height="95"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="From" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f9H-Wz-StT">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="From" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="f9H-Wz-StT">
                                     <rect key="frame" x="0.0" y="0.0" width="161" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="Qyt-7A-57B"/>
@@ -37,7 +37,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aiM-Xx-9JT">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="aiM-Xx-9JT">
                                     <rect key="frame" x="0.0" y="55" width="161" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="Kkd-Zh-0Of"/>
@@ -58,7 +58,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="hfz-Fz-f3y">
                             <rect key="frame" x="221" y="0.0" width="161" height="95"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="To" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bd9-dA-1eq">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="To" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bd9-dA-1eq">
                                     <rect key="frame" x="0.0" y="0.0" width="161" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="UOT-Es-s7h"/>
@@ -66,7 +66,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Converted value" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vj2-fW-c2W">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Converted value" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vj2-fW-c2W">
                                     <rect key="frame" x="0.0" y="55" width="161" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="OXl-kM-PEz"/>
