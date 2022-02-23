@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 
-class SymbolUseCase {
+class HomeUseCase {
     
     let repository: HomeRepository
     let disposeBag = DisposeBag()

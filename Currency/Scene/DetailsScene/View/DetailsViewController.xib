@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController" customModule="Currency" customModuleProvider="target">
             <connections>
+                <outlet property="currencyTableView" destination="i9l-ha-f9b" id="i90-3a-uPb"/>
+                <outlet property="segmentedControl" destination="a7k-23-ojb" id="r8p-s0-J5S"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a7k-23-ojb">
-                    <rect key="frame" x="35" y="60" width="344" height="41"/>
+                    <rect key="frame" x="35" y="52" width="344" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Itb-sb-PiG"/>
                     </constraints>
@@ -29,20 +31,20 @@
                     </segments>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="i9l-ha-f9b">
-                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                    <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.26379683609999999" green="1" blue="0.26379683609999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i9l-ha-f9b" secondAttribute="trailing" id="FZb-bC-g5q"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="i9l-ha-f9b" secondAttribute="bottom" id="J2z-Fk-daS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="a7k-23-ojb" secondAttribute="trailing" constant="35" id="Kxo-g3-SmX"/>
                 <constraint firstItem="a7k-23-ojb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="35" id="QrK-JS-xzs"/>
                 <constraint firstItem="i9l-ha-f9b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aSU-AY-1yb"/>
-                <constraint firstItem="a7k-23-ojb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="gop-SC-Z9C"/>
-                <constraint firstItem="i9l-ha-f9b" firstAttribute="top" secondItem="a7k-23-ojb" secondAttribute="bottom" constant="15" id="sFT-aA-TE5"/>
+                <constraint firstItem="a7k-23-ojb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="gop-SC-Z9C"/>
+                <constraint firstItem="i9l-ha-f9b" firstAttribute="top" secondItem="a7k-23-ojb" secondAttribute="bottom" constant="8" id="sFT-aA-TE5"/>
             </constraints>
             <point key="canvasLocation" x="139" y="136"/>
         </view>

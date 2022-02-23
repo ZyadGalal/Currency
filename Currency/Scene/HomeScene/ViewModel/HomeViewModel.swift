@@ -13,28 +13,22 @@ import RxCocoa
 class HomeViewModel: BaseViewModel {
     
     let disposeBag = DisposeBag()
-    let useCase: SymbolUseCase
+    let useCase: HomeUseCase
 
-    var pickerItems: Observable<[String]>
+    var pickerItems: BehaviorRelay<[String]> = .init(value: [])
     var fromField: BehaviorRelay<String> = .init(value: "")
     var toField: BehaviorRelay<String> = .init(value: "")
     var amountField: BehaviorRelay<String> = .init(value: "")
     var convertedField: BehaviorRelay<String> = .init(value: "")
     
-    lazy var fromCurrency: String = {
-        let symbol = symbols.someKey(forValue: fromField.value)
-        return symbol!
+    lazy var fromCurrencyRate: Double = {
+        return getFromFieldRate()
     }()
-    lazy var toCurrency: String = {
-        let symbol = symbols.someKey(forValue: toField.value)
-        return symbol!
-    }()
+    
     var loading: Bool = false
-    private let items: BehaviorRelay<[String]> = .init(value: [])
     private var symbols: [String: String] = [:]
     private var rates: [String: Double] = [:]
-    init(useCase: SymbolUseCase) {
-        self.pickerItems = items.asObservable()
+    init(useCase: HomeUseCase) {
         self.useCase = useCase
     }
     
@@ -43,7 +37,7 @@ class HomeViewModel: BaseViewModel {
     }
     
     func fromPickerViewDidSelect(row atIndex: Int) {
-        fromField.accept(items.value[atIndex])
+        fromField.accept(pickerItems.value[atIndex])
         if !(amountField.value.isEmpty) {
             let toCurrencyRate = getToFieldRate()
             let fromCurrencyRate = getFromFieldRate()
@@ -53,7 +47,7 @@ class HomeViewModel: BaseViewModel {
         }
     }
     func toPickerViewDidSelect(row atIndex: Int) {
-        toField.accept(items.value[atIndex])
+        toField.accept(pickerItems.value[atIndex])
         if !(amountField.value.isEmpty) {
             let toCurrencyRate = getToFieldRate()
             let fromCurrencyRate = getFromFieldRate()
@@ -97,7 +91,7 @@ class HomeViewModel: BaseViewModel {
             self.isLoading.onNext(false)
             self.symbols = items
             
-            self.items.accept(Array(items.values))
+            self.pickerItems.accept(Array(items.values))
             let firstIndex = Array(items.values)[0]
             self.fromField.accept(firstIndex)
             self.toField.accept(firstIndex)

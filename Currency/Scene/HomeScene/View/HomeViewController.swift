@@ -65,7 +65,7 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
         
         detailsButton.rx.tap.subscribe{ [weak self] event in
             guard let self = self else {return}
-            let detailsViewController = self.router.createDetailsController(fromCurrency: viewModel.fromCurrency, toCurrency: viewModel.toCurrency, otherCurrencies: viewModel.getTenOtherCurrencies())
+            let detailsViewController = self.router.createDetailsController(fromCurrency: viewModel.fromField.value, fromCurrencyRate: self.viewModel.fromCurrencyRate, toCurrency: viewModel.toField.value, otherCurrencies: viewModel.getTenOtherCurrencies())
             self.navigationController?.pushViewController(detailsViewController, animated: true)
         }.disposed(by: disposeBag)
         
