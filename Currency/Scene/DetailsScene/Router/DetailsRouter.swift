@@ -8,10 +8,10 @@
 import UIKit
 
 class DetailsRouter: BaseRouter {
-    func createSceneViewController(fromCurrency: String, fromCurrencyRate: Double, toCurrency: String, otherCurrencies: [String: Double]) -> UIViewController {
+    func createSceneViewController(currencyDetails: CurrencyDetails) -> UIViewController {
         let repository = DetailsRepository()
         let router = DetailsRouter()
-        let detailsViewModel = DetailsViewModel(repository: repository, fromCurrency: fromCurrency, fromCurrencyRate: fromCurrencyRate, toCurrency: toCurrency, otherCurrencies: otherCurrencies)
+        let detailsViewModel = DetailsViewModel(repository: repository, currencyDetails: currencyDetails)
         let detailsViewController = DetailsViewController(viewModel: detailsViewModel ,router: router)
         
         

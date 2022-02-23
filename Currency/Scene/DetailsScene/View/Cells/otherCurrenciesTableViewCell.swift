@@ -21,4 +21,8 @@ class otherCurrenciesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func config(fromCurrency: String, convertedAmount: Double, toCurrency: String) {
+        currencyLabel.text = "1 \(fromCurrency) = \(convertedAmount) \(toCurrency)"
+    }
+    
 }

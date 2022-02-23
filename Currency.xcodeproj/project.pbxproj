@@ -27,6 +27,7 @@
 		32203CE527C62DD800717673 /* otherCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32203CE327C62DD800717673 /* otherCurrenciesTableViewCell.xib */; };
 		32203CE827C6594A00717673 /* LastDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32203CE627C6594A00717673 /* LastDaysTableViewCell.swift */; };
 		32203CE927C6594A00717673 /* LastDaysTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32203CE727C6594A00717673 /* LastDaysTableViewCell.xib */; };
+		32203CEC27C6CE9B00717673 /* CurrencyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32203CEB27C6CE9B00717673 /* CurrencyDetails.swift */; };
 		3234E13F27C4B62D000508D2 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E13E27C4B62D000508D2 /* ProgressIndicator.swift */; };
 		3234E14627C4C375000508D2 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14527C4C375000508D2 /* DetailsViewModel.swift */; };
 		3234E14927C4C437000508D2 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14727C4C437000508D2 /* DetailsViewController.swift */; };
@@ -91,6 +92,7 @@
 		32203CE327C62DD800717673 /* otherCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = otherCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
 		32203CE627C6594A00717673 /* LastDaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastDaysTableViewCell.swift; sourceTree = "<group>"; };
 		32203CE727C6594A00717673 /* LastDaysTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LastDaysTableViewCell.xib; sourceTree = "<group>"; };
+		32203CEB27C6CE9B00717673 /* CurrencyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetails.swift; sourceTree = "<group>"; };
 		3234E13E27C4B62D000508D2 /* ProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		3234E14527C4C375000508D2 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		3234E14727C4C437000508D2 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +219,6 @@
 		3200877627C41339008526C1 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
-				3200877B27C41481008526C1 /* Repository */,
 				3200877927C413F2008526C1 /* View */,
 				3200877827C413EB008526C1 /* ViewModel */,
 				3200877727C413E4008526C1 /* Router */,
@@ -248,14 +249,6 @@
 				3200877D27C41696008526C1 /* HomeViewController.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		3200877B27C41481008526C1 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				3200878427C41800008526C1 /* HomeRepository.swift */,
-			);
-			path = Repository;
 			sourceTree = "<group>";
 		};
 		3200878727C41ABE008526C1 /* Core */ = {
@@ -289,6 +282,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		32203CEA27C65F8200717673 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				3234E14B27C4C459000508D2 /* DetailsRepository.swift */,
+				3200878427C41800008526C1 /* HomeRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		3234E13B27C4B543000508D2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,17 +307,8 @@
 				3234E14427C4C366000508D2 /* Router */,
 				3234E14327C4C35D000508D2 /* ViewModel */,
 				3234E14227C4C358000508D2 /* View */,
-				3234E14127C4C351000508D2 /* Repository */,
 			);
 			path = DetailsScene;
-			sourceTree = "<group>";
-		};
-		3234E14127C4C351000508D2 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				3234E14B27C4C459000508D2 /* DetailsRepository.swift */,
-			);
-			path = Repository;
 			sourceTree = "<group>";
 		};
 		3234E14227C4C358000508D2 /* View */ = {
@@ -355,6 +348,7 @@
 		3234E15427C56418000508D2 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				32203CEA27C65F8200717673 /* Repository */,
 				3234E15527C5641F000508D2 /* Model */,
 				3234E15127C562C9000508D2 /* UseCases */,
 			);
@@ -366,6 +360,7 @@
 			children = (
 				3234E15627C5647C000508D2 /* AllSymbolsModel.swift */,
 				329581B327C5691A00B69993 /* CurrencyModel.swift */,
+				32203CEB27C6CE9B00717673 /* CurrencyDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -639,6 +634,7 @@
 				3200878E27C45027008526C1 /* APIRouter.swift in Sources */,
 				3234E15027C4C6DD000508D2 /* BaseRouter.swift in Sources */,
 				329581B827C5968B00B69993 /* CustomError.swift in Sources */,
+				32203CEC27C6CE9B00717673 /* CurrencyDetails.swift in Sources */,
 				3200878127C417ED008526C1 /* HomeViewModel.swift in Sources */,
 				3200878327C417F4008526C1 /* HomeRouter.swift in Sources */,
 				3234E14927C4C437000508D2 /* DetailsViewController.swift in Sources */,

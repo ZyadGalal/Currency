@@ -12,42 +12,34 @@ import RxCocoa
 
 class HomeViewModel: BaseViewModel {
     
-    let disposeBag = DisposeBag()
-    let useCase: HomeUseCase
+    let repository: HomeRepository
 
-    var pickerItems: BehaviorRelay<[String]> = .init(value: [])
+    var pickerItems: BehaviorRelay<[String: String]> = .init(value: [:])
     var fromField: BehaviorRelay<String> = .init(value: "")
     var toField: BehaviorRelay<String> = .init(value: "")
     var amountField: BehaviorRelay<String> = .init(value: "")
     var convertedField: BehaviorRelay<String> = .init(value: "")
+    private var rates: BehaviorRelay<[String: Double]> = .init(value: [:])
     
-    lazy var fromCurrencyRate: Double = {
-        return getFromFieldRate()
-    }()
-    
-    var loading: Bool = false
-    private var symbols: [String: String] = [:]
-    private var rates: [String: Double] = [:]
-    init(useCase: HomeUseCase) {
-        self.useCase = useCase
+    init(repository: HomeRepository) {
+        self.repository = repository
     }
     
-    func viewDidLoad() {
+    func viewLoaded() {
         fetchSymbolsData()
     }
     
-    func fromPickerViewDidSelect(row atIndex: Int) {
-        fromField.accept(pickerItems.value[atIndex])
-        if !(amountField.value.isEmpty) {
-            let toCurrencyRate = getToFieldRate()
-            let fromCurrencyRate = getFromFieldRate()
-            
-            let convertedAmount = self.convertCurrency(firstCurrencyRate: toCurrencyRate, secondCurrencyRate: fromCurrencyRate, amount: Double(amountField.value)!)
-            convertedField.accept("\(convertedAmount)")
-        }
+    func fromPickerViewDidSelect(index: Int) {
+        let symbol = Array(pickerItems.value.values)[index]
+        fromField.accept(symbol)
+        pickerViewItemSelected()
     }
-    func toPickerViewDidSelect(row atIndex: Int) {
-        toField.accept(pickerItems.value[atIndex])
+    func toPickerViewDidSelect(index: Int) {
+        let symbol = Array(pickerItems.value.values)[index]
+        toField.accept(symbol)
+        pickerViewItemSelected()
+    }
+    func pickerViewItemSelected() {
         if !(amountField.value.isEmpty) {
             let toCurrencyRate = getToFieldRate()
             let fromCurrencyRate = getFromFieldRate()
@@ -58,24 +50,19 @@ class HomeViewModel: BaseViewModel {
     }
     func convertedValueDidChanged(to number: String) {
         if !(number.isEmpty) {
-            let toCurrencyRate = getToFieldRate()
-            let fromCurrencyRate = getFromFieldRate()
-            
-            let convertedAmount = self.convertCurrency(firstCurrencyRate: fromCurrencyRate, secondCurrencyRate: toCurrencyRate, amount: Double(number)!)
+            let convertedAmount = self.convertCurrency(firstCurrencyRate: getFromFieldRate(), secondCurrencyRate: getToFieldRate(), amount: Double(number)!)
             convertedField.accept(number)
             amountField.accept("\(convertedAmount)")
         }
     }
     func amountValueDidChanged(to number: String) {
         if !(number.isEmpty) {
-            let toCurrencyRate = getToFieldRate()
-            let fromCurrencyRate = getFromFieldRate()
-            
-            let convertedAmount = self.convertCurrency(firstCurrencyRate: toCurrencyRate, secondCurrencyRate: fromCurrencyRate, amount: Double(number)!)
+            let convertedAmount = self.convertCurrency(firstCurrencyRate: getToFieldRate(), secondCurrencyRate: getFromFieldRate(), amount: Double(number)!)
             amountField.accept(number)
             convertedField.accept("\(convertedAmount)")
         }
     }
+    
     
     func swapButtonDidClicked() {
         let swapped = fromField.value
@@ -86,12 +73,12 @@ class HomeViewModel: BaseViewModel {
     //network calls
     private func fetchSymbolsData(){
         isLoading.onNext(true)
-        useCase.fetchSymbols().subscribe { [weak self] (items) in
+        repository.fetchSymbolsData().subscribe { [weak self] (items) in
             guard let self = self else {return}
             self.isLoading.onNext(false)
-            self.symbols = items
+            //self.symbols = items
             
-            self.pickerItems.accept(Array(items.values))
+            self.pickerItems.accept(items)
             let firstIndex = Array(items.values)[0]
             self.fromField.accept(firstIndex)
             self.toField.accept(firstIndex)
@@ -101,8 +88,8 @@ class HomeViewModel: BaseViewModel {
             self.displayError.onNext(error.localizedDescription)
             print("I got error.. \(error)")
         } onCompleted: {
-            self.fetchRatesData()
             self.isLoading.onNext(false)
+            self.fetchRatesData()
             
         }.disposed(by: disposeBag)
 
@@ -110,13 +97,13 @@ class HomeViewModel: BaseViewModel {
     
     private func fetchRatesData(){
         isLoading.onNext(true)
-        useCase.fetchCurrentRate().subscribe { [weak self] (items) in
+        repository.fetchRatesData().subscribe { [weak self] (items) in
             guard let self = self else {return}
             self.isLoading.onNext(false)
-            self.rates = items.rates!
-            let firstIndex = Array(self.symbols.values)[0]
-            let currency = self.symbols.someKey(forValue: firstIndex)
-            let currencyRate = self.rates[currency!]!
+            self.rates.accept(items.rates!)
+            let firstIndex = Array(self.pickerItems.value.values)[0]
+            let currency = self.pickerItems.value.someKey(forValue: firstIndex)
+            let currencyRate = self.rates.value[currency!]!
             self.amountField.accept("1")
             let convertedAmount = self.convertCurrency(firstCurrencyRate: currencyRate, secondCurrencyRate: currencyRate, amount: Double(self.amountField.value)!)
             self.convertedField.accept("\(convertedAmount)")
@@ -136,17 +123,17 @@ class HomeViewModel: BaseViewModel {
         return Double(round(1000 * result) / 1000)
     }
     private func getToFieldRate() -> Double {
-        let toCurrency = self.symbols.someKey(forValue: toField.value)
-        return self.rates[toCurrency!]!
+        let toCurrency = self.pickerItems.value.someKey(forValue: toField.value)
+        return self.rates.value[toCurrency!]!
     }
-    private func getFromFieldRate() -> Double {
-        let fromCurrency = self.symbols.someKey(forValue: fromField.value)
-        return self.rates[fromCurrency!]!
+    func getFromFieldRate() -> Double {
+        let fromCurrency = self.pickerItems.value.someKey(forValue: fromField.value)
+        return self.rates.value[fromCurrency!]!
     }
     func getTenOtherCurrencies() -> [String: Double] {
         var tempRates = [String: Double]()
         while (tempRates.count != 10) {
-            let symbol = rates.randomElement()
+            let symbol = rates.value.randomElement()
             tempRates[symbol!.key] = symbol!.value
         }
 

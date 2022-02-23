@@ -16,28 +16,38 @@ class DetailsViewController: BaseWireframe<DetailsViewModel, DetailsRouter> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.viewDidLoad()
+        registerCells()
+        self.viewModel.viewLoaded()
     }
     
     override func bind(viewModel: DetailsViewModel) {
+        setupSegmentedControlEvents()
+        setupTableViewBindings()
+    }
+    
+    private func setupSegmentedControlEvents() {
         segmentedControl.rx.controlEvent(.valueChanged).subscribe{ [weak self] _ in
             guard let self = self else {return}
             self.viewModel.segmentedControlChange(to: self.segmentedControl.selectedSegmentIndex)
             
         }.disposed(by: disposeBag)
-        
-
-        self.currencyTableView.register(UINib(nibName: "otherCurrenciesTableViewCell", bundle: nil), forCellReuseIdentifier: "otherCurrencies")
-        self.currencyTableView.register(UINib(nibName: "LastDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "LastDaysTableViewCell")
-        
+    }
+    
+    private func setupTableViewBindings() {
         self.viewModel.otherCurrencies.bind(to: currencyTableView.rx.items(cellIdentifier: "otherCurrencies",cellType: otherCurrenciesTableViewCell.self)){ row , item , cell in
             
-            let convertedAmount = self.viewModel.convertCurrency(firstCurrencyRate: item.value, secondCurrencyRate: self.viewModel.fromCurrencyRate, amount: 1)
-            cell.currencyLabel.text = "1 \(self.viewModel.fromCurrency) = \(convertedAmount) \(item.key)"
+            let convertedAmount = self.viewModel.convertCurrency(firstCurrencyRate: item.value, secondCurrencyRate: self.viewModel.currencyDetails.fromCurrencyRate, amount: 1)
+            cell.config(fromCurrency: self.viewModel.currencyDetails.fromCurrency, convertedAmount: convertedAmount, toCurrency: item.key)
             
         }.disposed(by: disposeBag)
         
-        
+//        self.viewModel.lastDays.bind(to: currencyTableView.rx.items(cellIdentifier: "LastDaysTableViewCell", cellType: LastDaysTableViewCell.self)) {row , item, cell in
+//            
+//        }.disposed(by: disposeBag)
+    }
+    private func registerCells () {
+        self.currencyTableView.register(UINib(nibName: "otherCurrenciesTableViewCell", bundle: nil), forCellReuseIdentifier: "otherCurrencies")
+        self.currencyTableView.register(UINib(nibName: "LastDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "LastDaysTableViewCell")
     }
 }
 

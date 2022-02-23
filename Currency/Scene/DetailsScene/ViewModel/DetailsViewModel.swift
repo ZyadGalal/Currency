@@ -13,31 +13,24 @@ import RxCocoa
 class DetailsViewModel: BaseViewModel {
     
     var repository: DetailsRepository
-    let fromCurrency: String
-    let fromCurrencyRate: Double
-    let toCurrency: String
-    let currencies: [String:Double]
+    let currencyDetails: CurrencyDetails
     var otherCurrencies = PublishSubject<[String: Double]>()
     var lastDays = PublishSubject<[String: Double]>()
 
-    init(repository: DetailsRepository, fromCurrency: String, fromCurrencyRate: Double, toCurrency: String, otherCurrencies: [String: Double]) {
+    init(repository: DetailsRepository, currencyDetails: CurrencyDetails) {
         self.repository = repository
-        self.fromCurrency = fromCurrency
-        self.toCurrency = toCurrency
-        self.currencies = otherCurrencies
-        self.fromCurrencyRate = fromCurrencyRate
-        
+        self.currencyDetails = currencyDetails
     }
     
-    func viewDidLoad(){
-        
+    func viewLoaded(){
+        print("hello")
     }
     func segmentedControlChange(to index: Int) {
         if index == 0 {
-            lastDays.onNext(currencies)
+            lastDays.onNext(currencyDetails.currencies)
         }
         else {
-            self.otherCurrencies.onNext(currencies)
+            self.otherCurrencies.onNext(currencyDetails.currencies)
         }
         
     }

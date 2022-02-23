@@ -13,6 +13,7 @@ enum APIRouter {
     case supportedSymbols(queryParameters: [String: String])
     case latest(queryParameters: [String: String])
     case historicalRates(date: String, queryParameters: [String: String])
+    
     var method: HTTPMethod {
         switch self {
         

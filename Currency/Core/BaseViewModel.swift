@@ -9,13 +9,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol ViewModel {
-    
+protocol ViewModelProtocol {
+    var isLoading: PublishSubject<Bool> {get set}
+    var displayError: PublishSubject<String> {get set}
+
 }
 
-class BaseViewModel: ViewModel {
+class BaseViewModel: ViewModelProtocol {
     var isLoading: PublishSubject<Bool> = .init()
     var displayError: PublishSubject<String> = .init()
-    
+    let disposeBag = DisposeBag()
+
     
 }
