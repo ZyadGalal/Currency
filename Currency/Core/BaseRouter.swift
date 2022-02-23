@@ -8,5 +8,5 @@
 import UIKit
 
 protocol BaseRouter {
-    func createSceneViewController() -> UIViewController
+    
 }

@@ -21,6 +21,14 @@ class HomeViewModel: BaseViewModel {
     var amountField: BehaviorRelay<String> = .init(value: "")
     var convertedField: BehaviorRelay<String> = .init(value: "")
     
+    lazy var fromCurrency: String = {
+        let symbol = symbols.someKey(forValue: fromField.value)
+        return symbol!
+    }()
+    lazy var toCurrency: String = {
+        let symbol = symbols.someKey(forValue: toField.value)
+        return symbol!
+    }()
     var loading: Bool = false
     private let items: BehaviorRelay<[String]> = .init(value: [])
     private var symbols: [String: String] = [:]
@@ -140,5 +148,14 @@ class HomeViewModel: BaseViewModel {
     private func getFromFieldRate() -> Double {
         let fromCurrency = self.symbols.someKey(forValue: fromField.value)
         return self.rates[fromCurrency!]!
+    }
+    func getTenOtherCurrencies() -> [String: Double] {
+        var tempRates = [String: Double]()
+        while (tempRates.count != 10) {
+            let symbol = rates.randomElement()
+            tempRates[symbol!.key] = symbol!.value
+        }
+
+        return tempRates
     }
 }

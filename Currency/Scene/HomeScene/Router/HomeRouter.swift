@@ -18,7 +18,7 @@ class HomeRouter: BaseRouter {
         return HomeViewController
     }
 
-    func createDetailsController() -> UIViewController{
-        return DetailsRouter().createSceneViewController()
+    func createDetailsController(fromCurrency: String, toCurrency: String, otherCurrencies: [String: Double]) -> UIViewController{
+        return DetailsRouter().createSceneViewController(fromCurrency: fromCurrency, toCurrency: toCurrency, otherCurrencies: otherCurrencies)
     }
 }
