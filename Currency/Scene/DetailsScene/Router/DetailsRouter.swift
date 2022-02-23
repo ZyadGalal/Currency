@@ -12,9 +12,7 @@ class DetailsRouter: BaseRouter {
         let repository = DetailsRepository()
         let router = DetailsRouter()
         let detailsViewModel = DetailsViewModel(repository: repository, currencyDetails: currencyDetails)
-        let detailsViewController = DetailsViewController(viewModel: detailsViewModel ,router: router)
-        
-        
+        let detailsViewController = DetailsViewController(viewModel: detailsViewModel, router: router)
         return detailsViewController
     }
 

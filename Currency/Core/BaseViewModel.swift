@@ -20,5 +20,4 @@ class BaseViewModel: ViewModelProtocol {
     var displayError: PublishSubject<String> = .init()
     let disposeBag = DisposeBag()
 
-    
 }

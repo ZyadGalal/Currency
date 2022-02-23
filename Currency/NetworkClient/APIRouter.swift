@@ -9,26 +9,23 @@ import Foundation
 import RxSwift
 
 enum APIRouter {
-    
     case supportedSymbols(queryParameters: [String: String])
     case latest(queryParameters: [String: String])
     case historicalRates(date: String, queryParameters: [String: String])
-    
+
     var method: HTTPMethod {
         switch self {
-        
         case .supportedSymbols:
-            return .Get
+            return .get
         case .historicalRates:
-            return .Get
+            return .get
         case .latest:
-            return .Get
+            return .get
         }
     }
     var path: String {
         switch self {
-        
-        case .supportedSymbols(_):
+        case .supportedSymbols:
             return "symbols"
         case .historicalRates(let date, _):
             return date
@@ -36,10 +33,9 @@ enum APIRouter {
             return "latest"
         }
     }
-    
+
     var queryParameters: [String: String] {
         switch self {
-            
         case .supportedSymbols(let queryParameter):
             return queryParameter
         case .historicalRates(_, let queryParameter):
@@ -48,10 +44,9 @@ enum APIRouter {
             return queryParameters
         }
     }
-    
 }
 
 enum HTTPMethod: String {
-    case Get
+    case get
     case post
 }

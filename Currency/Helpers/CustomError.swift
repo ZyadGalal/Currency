@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 public enum CustomError: Error {
     case APIError(message: String)
 }

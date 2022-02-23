@@ -9,9 +9,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-
 class HomeViewModel: BaseViewModel {
-    
+
     let repository: HomeRepository
 
     var pickerItems: BehaviorRelay<[String: String]> = .init(value: [:])
@@ -20,15 +19,15 @@ class HomeViewModel: BaseViewModel {
     var amountField: BehaviorRelay<String> = .init(value: "")
     var convertedField: BehaviorRelay<String> = .init(value: "")
     private var rates: BehaviorRelay<[String: Double]> = .init(value: [:])
-    
+
     init(repository: HomeRepository) {
         self.repository = repository
     }
-    
+
     func viewLoaded() {
         fetchSymbolsData()
     }
-    
+
     func fromPickerViewDidSelect(index: Int) {
         let symbol = Array(pickerItems.value.values)[index]
         fromField.accept(symbol)
@@ -43,7 +42,6 @@ class HomeViewModel: BaseViewModel {
         if !(amountField.value.isEmpty) {
             let toCurrencyRate = getToFieldRate()
             let fromCurrencyRate = getFromFieldRate()
-            
             let convertedAmount = self.convertCurrency(firstCurrencyRate: toCurrencyRate, secondCurrencyRate: fromCurrencyRate, amount: Double(amountField.value)!)
             convertedField.accept("\(convertedAmount)")
         }
@@ -62,22 +60,20 @@ class HomeViewModel: BaseViewModel {
             convertedField.accept("\(convertedAmount)")
         }
     }
-    
-    
+
     func swapButtonDidClicked() {
         let swapped = fromField.value
         fromField.accept(toField.value)
         toField.accept(swapped)
         amountValueDidChanged(to: amountField.value)
     }
-    //network calls
-    private func fetchSymbolsData(){
+    // network calls
+    private func fetchSymbolsData() {
         isLoading.onNext(true)
         repository.fetchSymbolsData().subscribe { [weak self] (items) in
             guard let self = self else {return}
             self.isLoading.onNext(false)
-            //self.symbols = items
-            
+            // self.symbols = items
             self.pickerItems.accept(items)
             let firstIndex = Array(items.values)[0]
             self.fromField.accept(firstIndex)
@@ -90,12 +86,10 @@ class HomeViewModel: BaseViewModel {
         } onCompleted: {
             self.isLoading.onNext(false)
             self.fetchRatesData()
-            
         }.disposed(by: disposeBag)
-
     }
-    
-    private func fetchRatesData(){
+
+    private func fetchRatesData() {
         isLoading.onNext(true)
         repository.fetchRatesData().subscribe { [weak self] (items) in
             guard let self = self else {return}
@@ -118,7 +112,7 @@ class HomeViewModel: BaseViewModel {
 
     }
 
-    private func convertCurrency(firstCurrencyRate: Double, secondCurrencyRate: Double, amount: Double) -> Double{
+    private func convertCurrency(firstCurrencyRate: Double, secondCurrencyRate: Double, amount: Double) -> Double {
         let result = (firstCurrencyRate / secondCurrencyRate) * amount
         return Double(round(1000 * result) / 1000)
     }
@@ -132,7 +126,7 @@ class HomeViewModel: BaseViewModel {
     }
     func getTenOtherCurrencies() -> [String: Double] {
         var tempRates = [String: Double]()
-        while (tempRates.count != 10) {
+        while tempRates.count != 10 {
             let symbol = rates.value.randomElement()
             tempRates[symbol!.key] = symbol!.value
         }

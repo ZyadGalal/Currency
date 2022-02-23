@@ -18,12 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: homeController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
+
         return true
     }
 
-
-
-
 }
-

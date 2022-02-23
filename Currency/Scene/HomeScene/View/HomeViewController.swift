@@ -17,7 +17,7 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
     @IBOutlet weak var convertedValueTextField: UITextField!
     @IBOutlet weak var detailsButton: UIButton!
     @IBOutlet weak var swapButton: UIButton!
-    
+
     lazy var fromPickerView: UIPickerView = {
         return UIPickerView()
     }()
@@ -33,15 +33,15 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
     func setupUI() {
         fromTextField.inputView = fromPickerView
         createDoneButton(for: fromTextField)
-        
+
         toTextField.inputView = toPickerView
         createDoneButton(for: toTextField)
     }
-    func createDoneButton (for textField : UITextField) {
+    func createDoneButton (for textField: UITextField) {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action:#selector(donePressedOfPickerView))
+
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedOfPickerView))
         toolbar.setItems([done], animated: true)
         textField.inputAccessoryView = toolbar
     }
@@ -67,7 +67,7 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
                 guard let self = self else {return}
                 self.viewModel.amountValueDidChanged(to: self.amountTextField.text!)
             }).disposed(by: disposeBag)
-        
+
         convertedValueTextField.rx.controlEvent([.editingChanged])
             .subscribe({ [weak self] _ in
                 guard let self = self else {return}
@@ -75,33 +75,36 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
             }).disposed(by: disposeBag)
     }
     func setupButtonsSubscription(viewModel: HomeViewModel) {
-        detailsButton.rx.tap.subscribe{ [weak self] event in
+        detailsButton.rx.tap.subscribe { [weak self] _ in
             guard let self = self else {return}
             let fromCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.fromField.value)
             let toCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.toField.value)
-            let currencyDetails = CurrencyDetails(fromCurrency: fromCurrency!, fromCurrencyRate: self.viewModel.getFromFieldRate(), toCurrency: toCurrency!, currencies: viewModel.getTenOtherCurrencies())
+            let currencyDetails = CurrencyDetails(fromCurrency: fromCurrency!,
+                                                  fromCurrencyRate: self.viewModel.getFromFieldRate(),
+                                                  toCurrency: toCurrency!,
+                                                  currencies: viewModel.getTenOtherCurrencies())
             let detailsViewController = self.router.createDetailsController(currencyDetails: currencyDetails)
             self.navigationController?.pushViewController(detailsViewController, animated: true)
         }.disposed(by: disposeBag)
-        
-        swapButton.rx.tap.subscribe{[weak self] event in
+
+        swapButton.rx.tap.subscribe {[weak self] _ in
             guard let self = self else {return}
             self.viewModel.swapButtonDidClicked()
         }.disposed(by: disposeBag)
     }
     func setupPickerViewBinding() {
-        viewModel.pickerItems.bind(to: toPickerView.rx.itemTitles){_, item in
+        viewModel.pickerItems.bind(to: toPickerView.rx.itemTitles) {_, item in
             return "\(item.value)"
         }.disposed(by: disposeBag)
-        
-        viewModel.pickerItems.bind(to: fromPickerView.rx.itemTitles){_, item in
+
+        viewModel.pickerItems.bind(to: fromPickerView.rx.itemTitles) {_, item in
             return "\(item.value)"
-            
+
         }.disposed(by: disposeBag)
-        
+
     }
-    func pickerViewSubscribeOnSelect (){
-        fromPickerView.rx.itemSelected.subscribe{[weak self] event in
+    func pickerViewSubscribeOnSelect() {
+        fromPickerView.rx.itemSelected.subscribe {[weak self] event in
             guard let self = self else {return}
             switch event {
             case .next(let selected):
@@ -110,8 +113,8 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
                 break
             }
         }.disposed(by: disposeBag)
-        
-        toPickerView.rx.itemSelected.subscribe{[weak self] event in
+
+        toPickerView.rx.itemSelected.subscribe {[weak self] event in
             guard let self = self else {return}
             switch event {
             case .next(let selected):
@@ -122,4 +125,3 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
         }.disposed(by: disposeBag)
     }
 }
-

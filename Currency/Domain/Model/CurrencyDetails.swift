@@ -7,10 +7,9 @@
 
 import Foundation
 
-
 struct CurrencyDetails {
     let fromCurrency: String
     let fromCurrencyRate: Double
     let toCurrency: String
-    let currencies: [String:Double]
+    let currencies: [String: Double]
 }

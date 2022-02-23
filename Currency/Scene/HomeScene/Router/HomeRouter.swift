@@ -12,12 +12,12 @@ class HomeRouter: BaseRouter {
         let repository = HomeRepository()
         let router = HomeRouter()
         let homeViewModel = HomeViewModel(repository: repository)
-        let HomeViewController = HomeViewController(viewModel: homeViewModel, router: router)
-        
-        return HomeViewController
+        let homeViewController = HomeViewController(viewModel: homeViewModel, router: router)
+
+        return homeViewController
     }
 
-    func createDetailsController(currencyDetails: CurrencyDetails) -> UIViewController{
+    func createDetailsController(currencyDetails: CurrencyDetails) -> UIViewController {
         return DetailsRouter().createSceneViewController(currencyDetails: currencyDetails)
     }
 }
