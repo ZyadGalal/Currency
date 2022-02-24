@@ -42,6 +42,7 @@
 		326EE9C227C7893600B35305 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9C127C7893600B35305 /* CoreDataStack.swift */; };
 		326EE9C427C801DC00B35305 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9C327C801DC00B35305 /* Date + Extension.swift */; };
 		326EE9C627C846EC00B35305 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9C527C846EC00B35305 /* String + Extension.swift */; };
+		326EE9CA27C8487600B35305 /* Double + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9C927C8487600B35305 /* Double + Extension.swift */; };
 		329581B427C5691A00B69993 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329581B327C5691A00B69993 /* CurrencyModel.swift */; };
 		329581B627C58D7100B69993 /* Dictionary + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329581B527C58D7100B69993 /* Dictionary + Extensions.swift */; };
 		329581B827C5968B00B69993 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329581B727C5968B00B69993 /* CustomError.swift */; };
@@ -112,6 +113,7 @@
 		326EE9C127C7893600B35305 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		326EE9C327C801DC00B35305 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		326EE9C527C846EC00B35305 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		326EE9C927C8487600B35305 /* Double + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Extension.swift"; sourceTree = "<group>"; };
 		329581B327C5691A00B69993 /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		329581B527C58D7100B69993 /* Dictionary + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary + Extensions.swift"; sourceTree = "<group>"; };
 		329581B727C5968B00B69993 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				329581B727C5968B00B69993 /* CustomError.swift */,
 				326EE9C327C801DC00B35305 /* Date + Extension.swift */,
 				326EE9C527C846EC00B35305 /* String + Extension.swift */,
+				326EE9C927C8487600B35305 /* Double + Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				3200879227C45122008526C1 /* NetworkClient.swift in Sources */,
 				32203CE427C62DD800717673 /* OtherCurrenciesTableViewCell.swift in Sources */,
 				3234E14C27C4C459000508D2 /* DetailsRepository.swift in Sources */,
+				326EE9CA27C8487600B35305 /* Double + Extension.swift in Sources */,
 				32203CE827C6594A00717673 /* LastDaysTableViewCell.swift in Sources */,
 				3200873D27C4095A008526C1 /* AppDelegate.swift in Sources */,
 				3200878527C41800008526C1 /* HomeRepository.swift in Sources */,
