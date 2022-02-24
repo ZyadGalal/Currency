@@ -21,4 +21,9 @@ class LastDaysTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func config(date: String, fromCurrency: String, toCurrency: String, convertedRate: String) {
+        currencyLabel.text = "1 \(fromCurrency) = \(convertedRate) \(toCurrency)"
+        dateLabel.text = date
+    }
 }
