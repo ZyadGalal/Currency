@@ -36,6 +36,10 @@
 		3234E14E27C4C4E6000508D2 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14D27C4C4E6000508D2 /* DetailsRouter.swift */; };
 		3234E15027C4C6DD000508D2 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E14F27C4C6DD000508D2 /* BaseRouter.swift */; };
 		3234E15727C5647C000508D2 /* AllSymbolsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234E15627C5647C000508D2 /* AllSymbolsModel.swift */; };
+		326EE9B427C7885300B35305 /* Currency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9B227C7885300B35305 /* Currency.xcdatamodeld */; };
+		326EE9BF27C788FF00B35305 /* HistoricalRates+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9BD27C788FF00B35305 /* HistoricalRates+CoreDataClass.swift */; };
+		326EE9C027C788FF00B35305 /* HistoricalRates+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9BE27C788FF00B35305 /* HistoricalRates+CoreDataProperties.swift */; };
+		326EE9C227C7893600B35305 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EE9C127C7893600B35305 /* CoreDataStack.swift */; };
 		329581B427C5691A00B69993 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329581B327C5691A00B69993 /* CurrencyModel.swift */; };
 		329581B627C58D7100B69993 /* Dictionary + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329581B527C58D7100B69993 /* Dictionary + Extensions.swift */; };
 		329581B827C5968B00B69993 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329581B727C5968B00B69993 /* CustomError.swift */; };
@@ -100,6 +104,10 @@
 		3234E14D27C4C4E6000508D2 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		3234E14F27C4C6DD000508D2 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		3234E15627C5647C000508D2 /* AllSymbolsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSymbolsModel.swift; sourceTree = "<group>"; };
+		326EE9B327C7885300B35305 /* Currency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Currency.xcdatamodel; sourceTree = "<group>"; };
+		326EE9BD27C788FF00B35305 /* HistoricalRates+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalRates+CoreDataClass.swift"; sourceTree = "<group>"; };
+		326EE9BE27C788FF00B35305 /* HistoricalRates+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoricalRates+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		326EE9C127C7893600B35305 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		329581B327C5691A00B69993 /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		329581B527C58D7100B69993 /* Dictionary + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary + Extensions.swift"; sourceTree = "<group>"; };
 		329581B727C5968B00B69993 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 		3200873B27C4095A008526C1 /* Currency */ = {
 			isa = PBXGroup;
 			children = (
+				326EE9B127C7883400B35305 /* CoreData */,
 				3234E15427C56418000508D2 /* Domain */,
 				3234E13B27C4B543000508D2 /* Helpers */,
 				3200878C27C4501C008526C1 /* NetworkClient */,
@@ -184,6 +193,7 @@
 				3200874527C4095C008526C1 /* Assets.xcassets */,
 				3200874727C4095C008526C1 /* LaunchScreen.storyboard */,
 				3200874A27C4095C008526C1 /* Info.plist */,
+				326EE9B227C7885300B35305 /* Currency.xcdatamodeld */,
 			);
 			path = Currency;
 			sourceTree = "<group>";
@@ -352,6 +362,16 @@
 				32203CEB27C6CE9B00717673 /* CurrencyDetails.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		326EE9B127C7883400B35305 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				326EE9C127C7893600B35305 /* CoreDataStack.swift */,
+				326EE9BD27C788FF00B35305 /* HistoricalRates+CoreDataClass.swift */,
+				326EE9BE27C788FF00B35305 /* HistoricalRates+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		F0D179AC2CC9D4C304662A45 /* Frameworks */ = {
@@ -606,7 +626,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				326EE9B427C7885300B35305 /* Currency.xcdatamodeld in Sources */,
+				326EE9C027C788FF00B35305 /* HistoricalRates+CoreDataProperties.swift in Sources */,
 				3200879027C45107008526C1 /* NetworkConstants.swift in Sources */,
+				326EE9C227C7893600B35305 /* CoreDataStack.swift in Sources */,
 				329581B627C58D7100B69993 /* Dictionary + Extensions.swift in Sources */,
 				3200879227C45122008526C1 /* NetworkClient.swift in Sources */,
 				32203CE427C62DD800717673 /* OtherCurrenciesTableViewCell.swift in Sources */,
@@ -629,6 +652,7 @@
 				3234E14E27C4C4E6000508D2 /* DetailsRouter.swift in Sources */,
 				3234E14627C4C375000508D2 /* DetailsViewModel.swift in Sources */,
 				329581B427C5691A00B69993 /* CurrencyModel.swift in Sources */,
+				326EE9BF27C788FF00B35305 /* HistoricalRates+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +996,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		326EE9B227C7885300B35305 /* Currency.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				326EE9B327C7885300B35305 /* Currency.xcdatamodel */,
+			);
+			currentVersion = 326EE9B327C7885300B35305 /* Currency.xcdatamodel */;
+			path = Currency.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3200873127C4095A008526C1 /* Project object */;
 }

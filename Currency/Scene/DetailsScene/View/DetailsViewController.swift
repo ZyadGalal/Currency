@@ -46,7 +46,7 @@ class DetailsViewController: BaseWireframe<DetailsViewModel, DetailsRouter> {
 //        }.disposed(by: disposeBag)
     }
     private func registerCells () {
-        self.currencyTableView.register(UINib(nibName: "otherCurrenciesTableViewCell", bundle: nil), forCellReuseIdentifier: "otherCurrencies")
+        self.currencyTableView.register(UINib(nibName: "OtherCurrenciesTableViewCell", bundle: nil), forCellReuseIdentifier: "otherCurrencies")
         self.currencyTableView.register(UINib(nibName: "LastDaysTableViewCell", bundle: nil), forCellReuseIdentifier: "LastDaysTableViewCell")
     }
 }
