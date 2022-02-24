@@ -8,17 +8,17 @@
 import UIKit
 
 class NetworkClient {
+    
+    var task: URLSessionTask?
+    
     func performRequest<T: Decodable>(_ object: T.Type, router: APIRouter, completion: @escaping ((Result<T, Error>) -> Void)) {
-        let queryItems = router.queryParameters.map {
-            return URLQueryItem(name: "\($0)", value: "\($1)")
-        }
+        let accessKey = URLQueryItem(name: "access_key", value: "719e222e62adf55cd1ae2b6a7a26440c")
         guard var urlComponents = URLComponents(string: NetworkConstants.baseUrl + router.path) else {return}
-        urlComponents.queryItems = queryItems
-
+        urlComponents.queryItems = [accessKey]
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = router.method.rawValue
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        task = URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -35,7 +35,12 @@ class NetworkClient {
                     completion(.failure(error))
                 }
             }
-        }.resume()
-
+        }
+        task!.resume()
+        
+    }
+    
+    func cancelRequests() {
+        task!.cancel()
     }
 }
