@@ -82,7 +82,7 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
             let currencyDetails = CurrencyDetails(fromCurrency: fromCurrency!,
                                                   fromCurrencyRate: self.viewModel.getFromFieldRate(),
                                                   toCurrency: toCurrency!,
-                                                  currencies: viewModel.getTenOtherCurrencies())
+                                                  currenciesRates: viewModel.getTenOtherCurrencies())
             let detailsViewController = self.router.createDetailsController(currencyDetails: currencyDetails)
             self.navigationController?.pushViewController(detailsViewController, animated: true)
         }.disposed(by: disposeBag)
