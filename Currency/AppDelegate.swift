@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: homeController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-
+        CoreDataStack.sharedInstance.applicationDocumentsDirectory()
         return true
     }
 
