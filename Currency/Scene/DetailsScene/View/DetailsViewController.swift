@@ -42,7 +42,7 @@ class DetailsViewController: BaseWireframe<DetailsViewModel, DetailsRouter> {
     private func setupTableViewOtherCurrenciesBinding() {
         self.viewModel.otherCurrencies.bind(to: currencyTableView.rx.items(cellIdentifier: "otherCurrencies", cellType: OtherCurrenciesTableViewCell.self)) { _, item, cell in
 
-            let convertedAmount = self.viewModel.convertCurrency(firstCurrencyRate: item.value, secondCurrencyRate: self.viewModel.currencyDetails.fromCurrencyRate, amount: 1)
+            let convertedAmount = Double(1).convertCurrency(firstRate: item.value, secondRate: self.viewModel.currencyDetails.fromCurrencyRate)
             cell.config(fromCurrency: self.viewModel.currencyDetails.fromCurrency, convertedAmount: convertedAmount, toCurrency: item.key)
         }.disposed(by: disposeBag)
 
@@ -51,7 +51,7 @@ class DetailsViewController: BaseWireframe<DetailsViewModel, DetailsRouter> {
     private func setupTableViewLastDaysBinding() {
         self.viewModel.lastDaysCurrency.bind(to: currencyTableView.rx.items(cellIdentifier: "LastDaysTableViewCell", cellType: LastDaysTableViewCell.self)) { row , item , cell in
             let currencyDetails = self.viewModel.currencyDetails
-            let convertedAmount = self.viewModel.convertCurrency(firstCurrencyRate: (item.rates![currencyDetails.toCurrency])!, secondCurrencyRate: (item.rates![currencyDetails.fromCurrency])!, amount: 1)
+            let convertedAmount = Double(1).convertCurrency(firstRate: (item.rates![currencyDetails.toCurrency])!, secondRate: (item.rates![currencyDetails.fromCurrency])!)
             cell.config(date: item.date!, fromCurrency: currencyDetails.fromCurrency, toCurrency: currencyDetails.toCurrency, convertedRate: "\(convertedAmount)")
         }.disposed(by: disposeBag)
     }
