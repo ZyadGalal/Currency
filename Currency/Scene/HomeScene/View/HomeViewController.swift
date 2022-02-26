@@ -77,15 +77,17 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
     func setupButtonsSubscription(viewModel: HomeViewModel) {
         detailsButton.rx.tap.subscribe { [weak self] _ in
             guard let self = self else {return}
-            let fromCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.fromField.value)
-            let toCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.toField.value)
-            let fromRate = self.viewModel.getRate(from: self.viewModel.fromField.value)
-            let currencyDetails = CurrencyDetails(fromCurrency: fromCurrency!,
-                                                  fromCurrencyRate: fromRate,
-                                                  toCurrency: toCurrency!,
-                                                  currenciesRates: viewModel.getTenOtherCurrencies())
-            let detailsViewController = self.router.createDetailsController(currencyDetails: currencyDetails)
-            self.navigationController?.pushViewController(detailsViewController, animated: true)
+            if !(self.fromTextField.text!.isEmpty) {
+                let fromCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.fromField.value)
+                let toCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.toField.value)
+                let fromRate = self.viewModel.getRate(from: self.viewModel.fromField.value)
+                let currencyDetails = CurrencyDetails(fromCurrency: fromCurrency!,
+                                                      fromCurrencyRate: fromRate,
+                                                      toCurrency: toCurrency!,
+                                                      currenciesRates: viewModel.getTenPopularCurrencies())
+                let detailsViewController = self.router.createDetailsController(currencyDetails: currencyDetails)
+                self.navigationController?.pushViewController(detailsViewController, animated: true)
+            }
         }.disposed(by: disposeBag)
 
         swapButton.rx.tap.subscribe {[weak self] _ in

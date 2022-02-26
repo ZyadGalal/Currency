@@ -121,13 +121,20 @@ class HomeViewModel: BaseViewModel {
         let currencySymbol = getSymbol(from: currencyName)
         return self.rates.value[currencySymbol] ?? 0.0
     }
-    func getTenOtherCurrencies() -> [String: Double] {
+    func getTenPopularCurrencies() -> [String: Double] {
         var tempRates = [String: Double]()
-        while tempRates.count != 10 {
-            let symbol = rates.value.randomElement()
-            tempRates[symbol!.key] = symbol!.value
+        let fromCurrency = pickerItems.value.someKey(forValue: fromField.value)
+        let popularCurrencies = ["USD", "EUR", "GBP", "CAD", "EGP", "SAR", "AED", "JPY", "AUD", "CHF", "CNY"]
+        
+        for currency in popularCurrencies {
+            if fromCurrency == currency {
+                continue
+            }
+            tempRates[currency] = self.rates.value[currency]
+            if tempRates.count == 10 {
+                break
+            }
         }
-
         return tempRates
     }
 }
