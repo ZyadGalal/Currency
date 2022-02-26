@@ -64,4 +64,15 @@ class TestHomeViewModel: XCTestCase {
         XCTAssertNotEqual(from, homeViewModel.fromField.value)
         XCTAssertEqual(from, to)
     }
+    
+    func testGetPopularCurrencies(){
+        // given
+        homeViewModel.fromField = .init(value: "United States Dollar")
+        
+        // when
+        let popularCurrencies = homeViewModel.getTenPopularCurrencies()
+        
+        //then
+        XCTAssertFalse(popularCurrencies.keys.contains(homeViewModel.fromField.value) ? true : false)
+    }
 }
