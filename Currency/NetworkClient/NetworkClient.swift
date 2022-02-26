@@ -12,7 +12,7 @@ class NetworkClient {
     var task: URLSessionTask?
     
     func performRequest<T: Decodable>(_ object: T.Type, router: APIRouter, completion: @escaping ((Result<T, Error>) -> Void)) {
-        let accessKey = URLQueryItem(name: "access_key", value: "719e222e62adf55cd1ae2b6a7a26440c")
+        let accessKey = URLQueryItem(name: "access_key", value: "b78c68db5b26b8d60b929760a670f5ab")
         guard var urlComponents = URLComponents(string: NetworkConstants.baseUrl + router.path) else {return}
         urlComponents.queryItems = [accessKey]
         var request = URLRequest(url: urlComponents.url!)
