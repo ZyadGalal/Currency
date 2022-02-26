@@ -9,7 +9,12 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class HomeRepository {
+protocol HomeRepositoryProtocol {
+    func fetchSymbolsData() -> Observable<[String: String]>
+    func fetchRatesData() -> Observable<CurrencyModel>
+}
+
+class HomeRepository: HomeRepositoryProtocol {
     let networkClient: NetworkClient
 
     init(networkClient: NetworkClient = NetworkClient()) {
