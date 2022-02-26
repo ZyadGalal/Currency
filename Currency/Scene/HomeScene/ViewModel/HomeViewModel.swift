@@ -11,16 +11,16 @@ import RxCocoa
 
 class HomeViewModel: BaseViewModel {
 
-    let repository: HomeRepository
+    let repository: HomeRepositoryProtocol
 
     var pickerItems: BehaviorRelay<[String: String]> = .init(value: [:])
     var fromField: BehaviorRelay<String> = .init(value: "")
     var toField: BehaviorRelay<String> = .init(value: "")
     var amountField: BehaviorRelay<String> = .init(value: "")
     var convertedField: BehaviorRelay<String> = .init(value: "")
-    private var rates: BehaviorRelay<[String: Double]> = .init(value: [:])
+    var rates: BehaviorRelay<[String: Double]> = .init(value: [:])
 
-    init(repository: HomeRepository) {
+    init(repository: HomeRepositoryProtocol) {
         self.repository = repository
     }
 
@@ -40,22 +40,26 @@ class HomeViewModel: BaseViewModel {
     }
     func pickerViewItemSelected() {
         if !(amountField.value.isEmpty) {
-            let toCurrencyRate = getToFieldRate()
-            let fromCurrencyRate = getFromFieldRate()
+            let toCurrencyRate = getRate(from: toField.value)
+            let fromCurrencyRate = getRate(from: fromField.value)
             let convertedAmount = Double(amountField.value)!.convertCurrency(firstRate: toCurrencyRate, secondRate: fromCurrencyRate)
             convertedField.accept("\(convertedAmount)")
         }
     }
     func convertedValueDidChanged(to number: String) {
-        if !(number.isEmpty) {
-            let convertedAmount = Double(number)!.convertCurrency(firstRate: getFromFieldRate(), secondRate: getToFieldRate())
+        if let numberToDouble = Double(number) {
+            let fromRate = getRate(from: fromField.value)
+            let toRate = getRate(from: toField.value)
+            let convertedAmount = numberToDouble.convertCurrency(firstRate: fromRate, secondRate: toRate)
             convertedField.accept(number)
             amountField.accept("\(convertedAmount)")
         }
     }
     func amountValueDidChanged(to number: String) {
-        if !(number.isEmpty) {
-            let convertedAmount = Double(number)!.convertCurrency(firstRate: getToFieldRate(), secondRate: getFromFieldRate())
+        if let numberToDouble = Double(number) {
+            let fromRate = getRate(from: fromField.value)
+            let toRate = getRate(from: toField.value)
+            let convertedAmount = numberToDouble.convertCurrency(firstRate: toRate, secondRate: fromRate)
             amountField.accept(number)
             convertedField.accept("\(convertedAmount)")
         }
@@ -110,14 +114,12 @@ class HomeViewModel: BaseViewModel {
         }.disposed(by: disposeBag)
 
     }
-
-    private func getToFieldRate() -> Double {
-        let toCurrency = self.pickerItems.value.someKey(forValue: toField.value)
-        return self.rates.value[toCurrency!]!
+    func getSymbol(from field: String) -> String {
+        return self.pickerItems.value.someKey(forValue: field) ?? ""
     }
-    func getFromFieldRate() -> Double {
-        let fromCurrency = self.pickerItems.value.someKey(forValue: fromField.value)
-        return self.rates.value[fromCurrency!]!
+    func getRate(from currencyName: String) -> Double {
+        let currencySymbol = getSymbol(from: currencyName)
+        return self.rates.value[currencySymbol] ?? 0.0
     }
     func getTenOtherCurrencies() -> [String: Double] {
         var tempRates = [String: Double]()

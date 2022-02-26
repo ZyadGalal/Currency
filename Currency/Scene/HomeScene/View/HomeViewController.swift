@@ -79,8 +79,9 @@ class HomeViewController: BaseWireframe<HomeViewModel, HomeRouter> {
             guard let self = self else {return}
             let fromCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.fromField.value)
             let toCurrency = self.viewModel.pickerItems.value.someKey(forValue: self.viewModel.toField.value)
+            let fromRate = self.viewModel.getRate(from: self.viewModel.fromField.value)
             let currencyDetails = CurrencyDetails(fromCurrency: fromCurrency!,
-                                                  fromCurrencyRate: self.viewModel.getFromFieldRate(),
+                                                  fromCurrencyRate: fromRate,
                                                   toCurrency: toCurrency!,
                                                   currenciesRates: viewModel.getTenOtherCurrencies())
             let detailsViewController = self.router.createDetailsController(currencyDetails: currencyDetails)
